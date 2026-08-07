@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avtomobil narxini bashorat qilish</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 320px; }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
+        label { font-weight: bold; font-size: 14px; color: #555; }
+        input, select { width: 100%; padding: 8px; margin: 6px 0 16px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; background-color: #007bff; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #0056b3; }
+        .result { margin-top: 15px; text-align: center; font-size: 18px; font-weight: bold; color: #28a745; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Mashina narxini aniqlash</h2>
+    
+    <form action="/predict" method="POST">
+        <label for="year">Ishlab chiqarilgan yili:</label>
+        <input type="number" id="year" name="year" placeholder="Masalan: 2018" required>
+
+        <label for="mileage">Bosib o'tgan masofasi (km):</label>
+        <input type="number" id="mileage" name="mileage" placeholder="Masalan: 50000" required>
+
+        <label for="engine_size">Dvigatel hajmi (L):</label>
+        <input type="number" step="0.1" id="engine_size" name="engine_size" placeholder="Masalan: 2.0" required>
+
+        <label for="fuel_type">Yoqilg'i turi:</label>
+        <select id="fuel_type" name="fuel_type">
+            <option value="Petrol">Benzin (Petrol)</option>
+            <option value="Diesel">Dizel</option>
+            <option value="CNG">Gaz (CNG)</option>
+        </select>
+
+        <label for="transmission">Uzatmalar qutisi (KPP):</label>
+        <select id="transmission" name="transmission">
+            <option value="Manual">Mexanika (Manual)</option>
+            <option value="Automatic">Avtomat</option>
+        </select>
+
+        <button type="submit">Narxni hisoblash</button>
+    </form>
+
+    {% if predicted_price %}
+        <div class="result">
+            Taxminiy narxi: ${{ predicted_price }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
